@@ -81,7 +81,10 @@ namespace StudentsDB.Controllers
 
         public ActionResult Add(int id, String FirstName, String LastName, String StudentNumber)
         {
+            // to add a new student, we need a lecturer name
             String Lecturer = System.Web.HttpContext.Current.Session["Lecturer"].ToString();
+
+            // create a new student
             rhawthorne_StudentDB student = new rhawthorne_StudentDB()
             {
                 FirstName = FirstName,
@@ -89,27 +92,43 @@ namespace StudentsDB.Controllers
                 StudentNumber = StudentNumber,
                 Lecturer = Lecturer
             };
+
+            // add to the database and save changes
             db.rhawthorne_StudentDB.Add(student);
             db.SaveChanges();
+
+            // return the list view
             return this.List(null);
         }
 
         public ActionResult Save(int id, String FirstName, String LastName, String StudentNumber)
         {
+            // check if there is a lecturer change (TBD)
             String Lecturer = System.Web.HttpContext.Current.Session["Lecturer"].ToString();
+
+            // find the student object and change the values
             rhawthorne_StudentDB student = db.rhawthorne_StudentDB.Find(id);
             student.FirstName = FirstName;
             student.LastName = LastName;
             student.StudentNumber = StudentNumber;
             student.Lecturer = Lecturer;
+
+            // save the changes to the database
             db.SaveChanges();
+
+            // return the list view
             return this.List(null);
         }
 
         public ActionResult Delete(rhawthorne_StudentDB student)
         {
+            // find the student to be deleted
             rhawthorne_StudentDB remove = db.rhawthorne_StudentDB.Find(student.id);
+
+            // delete the student
             db.rhawthorne_StudentDB.Remove(remove);
+
+            // save the changes to the database
             db.SaveChanges();
             return this.List(null);
         }
