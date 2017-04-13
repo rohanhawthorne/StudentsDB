@@ -1,0 +1,28 @@
+﻿@model StudentsDB.Models.rhawthorne_StudentDB
+
+@{
+    ViewBag.Title = "Student Details";
+    ViewBag.Submit = (Model != null ? "Save" : "Add");
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+@using (Html.BeginForm((Model != null ? "Save" : "Add"), "Home", FormMethod.Get))
+{
+    @Html.Hidden("id", Model != null ? Model.id : 0);
+    <table>
+        <tr>
+            <td>@Html.Label("FirstName:")</td>
+            <td>@Html.TextBox("FirstName", Model != null ? Model.FirstName : null)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("LastName:")</td>
+            <td>@Html.TextBox("LastName", Model != null ? Model.LastName : null)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("StudentNumber:")</td>
+            <td>@Html.TextBox("StudentNumber", Model != null ? Model.StudentNumber : null)</td>
+        </tr>
+    </table>
+    <input type='submit' value='@ViewBag.Submit' />
+}

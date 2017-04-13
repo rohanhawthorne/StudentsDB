@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StudentsDB.Models.rhawthorne_StudentDB>
+
+@{
+    ViewBag.Title = "Student List";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<b>Welcome </b>@(ViewBag.Lecturer ?? "Please Log in").<br />
+
+@if (Model != null)
+{
+
+@Html.ActionLink("Add a student","New","Home")
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Details", "Home", null, null, null, item, null) |
+                    @Html.ActionLink("Delete", "Delete", "Home", null, null, null, item, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+}

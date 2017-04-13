@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Login Page";
+}
+
+<div>
+    <h1>Student Database</h1>
+    <div>Please log in using your lecturer id</div>
+    @using (Html.BeginForm("List", "Home", FormMethod.Get))
+    {
+       @Html.TextBox("Lecturer");
+       <input type="submit" value="Sign In">
+    }
+</div>
